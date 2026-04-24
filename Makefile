@@ -83,9 +83,10 @@ docker-build:
 	docker build -f $(DOCKER_FILE) -t $(DOCKER_IMAGE):$(DOCKER_TAG) .
 
 ## docker-run: Run Docker container
+# Note: using 8081 for RPC locally to avoid conflict with other services on my machine
 docker-run:
 	docker run --rm -it \
-		-p 8080:8080 \
+		-p 8081:8080 \
 		-p 9090:9090 \
 		-p 50832:50832 \
 		-v $(HOME)/.canopy:/root/.canopy \
