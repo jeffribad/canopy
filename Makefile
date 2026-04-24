@@ -87,6 +87,7 @@ docker-run:
 	docker run --rm -it \
 		-p 8080:8080 \
 		-p 9090:9090 \
+		-p 50832:50832 \
 		--name $(BINARY_NAME) \
 		$(DOCKER_IMAGE):$(DOCKER_TAG)
 
