@@ -85,12 +85,13 @@ docker-build:
 ## docker-run: Run Docker container
 # Note: using 8081 for RPC locally to avoid conflict with other services on my machine
 # Note: using 9091 for the second port to avoid conflict with a local Prometheus instance
+# Note: using a named volume instead of bind mount so container data survives image rebuilds
 docker-run:
 	docker run --rm -it \
 		-p 8081:8080 \
 		-p 9091:9090 \
 		-p 50832:50832 \
-		-v $(HOME)/.canopy:/root/.canopy \
+		-v canopy-data:/root/.canopy \
 		--name $(BINARY_NAME) \
 		$(DOCKER_IMAGE):$(DOCKER_TAG)
 
