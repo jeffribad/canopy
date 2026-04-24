@@ -88,6 +88,7 @@ docker-run:
 		-p 8080:8080 \
 		-p 9090:9090 \
 		-p 50832:50832 \
+		-v $(HOME)/.canopy:/root/.canopy \
 		--name $(BINARY_NAME) \
 		$(DOCKER_IMAGE):$(DOCKER_TAG)
 
