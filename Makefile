@@ -89,8 +89,9 @@ docker-build:
 # Note: --cpus and --memory limits added to keep resource usage reasonable on my dev laptop
 # Note: bumped memory limit from 512m to 768m after OOM kills during sync on my machine
 # Note: added --log-opt to cap log file size so disk doesn't fill up during long sync runs
+# Note: dropped --rm so I can inspect the container after it exits (useful for debugging)
 docker-run:
-	docker run --rm -it \
+	docker run -it \
 		-p 8081:8080 \
 		-p 9091:9090 \
 		-p 50832:50832 \
@@ -110,10 +111,4 @@ docker-stop:
 docker-compose-up:
 	docker-compose up -d
 
-## docker-compose-down: Stop all services
-docker-compose-down:
-	docker-compose down
-
-## help: Show this help message
-help:
-	@echo "Usage: make [ta
+## 
