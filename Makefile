@@ -87,6 +87,7 @@ docker-build:
 # Note: using 9091 for the second port to avoid conflict with a local Prometheus instance
 # Note: using a named volume instead of bind mount so container data survives image rebuilds
 # Note: --cpus and --memory limits added to keep resource usage reasonable on my dev laptop
+# Note: bumped memory limit from 512m to 768m after OOM kills during sync on my machine
 docker-run:
 	docker run --rm -it \
 		-p 8081:8080 \
@@ -94,7 +95,7 @@ docker-run:
 		-p 50832:50832 \
 		-v canopy-data:/root/.canopy \
 		--cpus="1.5" \
-		--memory="512m" \
+		--memory="768m" \
 		--name $(BINARY_NAME) \
 		$(DOCKER_IMAGE):$(DOCKER_TAG)
 
