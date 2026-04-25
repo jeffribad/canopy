@@ -88,6 +88,7 @@ docker-build:
 # Note: using a named volume instead of bind mount so container data survives image rebuilds
 # Note: --cpus and --memory limits added to keep resource usage reasonable on my dev laptop
 # Note: bumped memory limit from 512m to 768m after OOM kills during sync on my machine
+# Note: added --log-opt to cap log file size so disk doesn't fill up during long sync runs
 docker-run:
 	docker run --rm -it \
 		-p 8081:8080 \
@@ -96,6 +97,8 @@ docker-run:
 		-v canopy-data:/root/.canopy \
 		--cpus="1.5" \
 		--memory="768m" \
+		--log-opt max-size=50m \
+		--log-opt max-file=3 \
 		--name $(BINARY_NAME) \
 		$(DOCKER_IMAGE):$(DOCKER_TAG)
 
@@ -113,7 +116,4 @@ docker-compose-down:
 
 ## help: Show this help message
 help:
-	@echo "Usage: make [target]"
-	@echo ""
-	@echo "Targets:"
-	@grep -E '^## ' Makefile | sed 's/## /  /'
+	@echo "Usage: make [ta
