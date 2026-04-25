@@ -86,12 +86,15 @@ docker-build:
 # Note: using 8081 for RPC locally to avoid conflict with other services on my machine
 # Note: using 9091 for the second port to avoid conflict with a local Prometheus instance
 # Note: using a named volume instead of bind mount so container data survives image rebuilds
+# Note: --cpus and --memory limits added to keep resource usage reasonable on my dev laptop
 docker-run:
 	docker run --rm -it \
 		-p 8081:8080 \
 		-p 9091:9090 \
 		-p 50832:50832 \
 		-v canopy-data:/root/.canopy \
+		--cpus="1.5" \
+		--memory="512m" \
 		--name $(BINARY_NAME) \
 		$(DOCKER_IMAGE):$(DOCKER_TAG)
 
